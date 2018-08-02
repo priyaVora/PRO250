@@ -8,14 +8,19 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 
 public class CustomControl extends Control {
-	
+
+
+	private ChessBoard chessBoard;
+	private StatusBar statusBar;
+	private int statusBarSize = 100;
+
 	//similar to previous custom controlls but must handle more
 	//complex mouse interactions and key interactions
 	public CustomControl(){
 		setSkin(new CustomControlSkin(this));
 		
 		statusBar = new StatusBar();
-		chessBoard = new ChessBoard(statusBar);
+		chessBoard = new ChessBoard(statusBar, "Traditional");
 		getChildren().addAll(statusBar, chessBoard);
 		
 		setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -33,6 +38,7 @@ public class CustomControl extends Control {
 			public void handle(KeyEvent event) {
 				if (event.getCode() == KeyCode.SPACE)
 					chessBoard.resetGame();
+
 			}
 		});
 		
@@ -45,7 +51,26 @@ public class CustomControl extends Control {
 			}
 			
 		});
-		
+
+
+		statusBar.getGameMode().setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				System.out.println("Mode Selected");
+
+				if(statusBar.getGameMode().getSelectionModel().getSelectedItem().equals("Traditional Chess")) {
+					System.out.println("Traditional Chess was Selected");
+					statusBar.setGameModeValue("Traditional");
+					chessBoard.setCurrentGameMode("Traditional");
+				} else if(statusBar.getGameMode().getSelectionModel().getSelectedItem().equals("Chess 960")) {
+					System.out.println("Chess 960 was Selected");
+					chessBoard.setCurrentGameMode("Chess 960");
+					statusBar.setGameModeValue("Chess 960");
+				}
+
+				chessBoard.resetGame();
+			}
+		});
 	}
 	
 	public void resize(double width, double height){
@@ -55,8 +80,4 @@ public class CustomControl extends Control {
 		statusBar.resize(width, statusBarSize);
 		statusBar.setTranslateY(-(statusBarSize / 2));
 	}
-	
-	private ChessBoard chessBoard;
-	private StatusBar statusBar; 
-	private int statusBarSize = 100;	
 }

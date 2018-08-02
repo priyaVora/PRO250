@@ -15,11 +15,16 @@ import javafx.stage.Stage;
 
 //class definition
 public class ChessApplication extends Application {
+	// private fields for this class
+	private StackPane sp_mainlayout;	//layout which allows items to be positioned on top of each other
+	private CustomControl cc_custom;	//control which has a board and detects mouse and keyboard events
+
+
 	// overridden init method
 	@Override
 	public void init() {
 		// initialize the layout, create a CustomControl and it to the layout
-		sp_mainlayout = new StackPane(); 
+		sp_mainlayout = new StackPane();
 		cc_custom = new CustomControl();
 		sp_mainlayout.getChildren().add(cc_custom);
 	}
@@ -44,8 +49,5 @@ public class ChessApplication extends Application {
 	public static void main(String[] args) {
 			launch(args);
 	}
-	
-	// private fields for this class
-	private StackPane sp_mainlayout;	//layout which allows items to be positioned on top of each other
-	private CustomControl cc_custom;	//control which has a board and detects mouse and keyboard events
+
 }
