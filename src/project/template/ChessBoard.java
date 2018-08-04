@@ -7,6 +7,7 @@ import javafx.animation.Timeline;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -262,37 +263,81 @@ public class ChessBoard extends Pane {
 
 	public void initPieceChess960()
 	{
-		System.out.println("Chess 960 Game Map\n");
-		if(handler.getChess960Map() == null) {
-			System.out.println("Map is null");
+
+		PiecePosition rook1Position = handler.getChess960Map().get("rook_1_1");
+		if(rook1Position == null) {
+			System.out.println("Rook one is null");
+		} else {
+			System.out.println("X: " + rook1Position.getX());
+			System.out.println("Y: " + rook1Position.getY());
+			System.out.println(" ");
 		}
-		for (Map.Entry<String, PiecePosition> entry : handler.getChess960Map().entrySet()) {
-			String key = entry.getKey();
-			PiecePosition value = entry.getValue();
-			System.out.println(key);
-			System.out.println(value.getX());
-			System.out.println(value.getY());
+		PiecePosition knight1Position = handler.getChess960Map().get("knight_1_1");
+		if(knight1Position == null) {
+			System.out.println("Knight one is null");
+		}else {
+			System.out.println("X: " + knight1Position.getX());
+			System.out.println("Y: " + knight1Position.getY());
+			System.out.println(" ");
 		}
 
-		PiecePosition rook_1 = handler.getChess960Map().get("rook_1_1");
-		PiecePosition knight_1 = handler.getChess960Map().get("knight_1_1");
-		PiecePosition bishop_1 = handler.getChess960Map().get("bishop_1_1");
-		PiecePosition king_position= handler.getChess960Map().get("king_1");
-		PiecePosition queen_position = handler.getChess960Map().get("WHITE_QUEEN");
-		PiecePosition bishop_2 = handler.getChess960Map().get("bishop_1_1");
-		PiecePosition knight_2= handler.getChess960Map().get("knight_1_1");
-		PiecePosition rook_2 = handler.getChess960Map().get("rook_1_2");
+		PiecePosition bishop1Position = handler.getChess960Map().get("bishop_1_1");
+		if(bishop1Position == null) {
+			System.out.println("Bishop one is null");
+		}else {
+			System.out.println("X: " + bishop1Position.getX());
+			System.out.println("Y: " + bishop1Position.getY());
+			System.out.println(" ");
+		}
 
-		PiecePosition pawn_1 = handler.getChess960Map().get("pawn_1_1");
-		PiecePosition pawn_2 = handler.getChess960Map().get("pawn_1_2");
-		PiecePosition pawn_3 = handler.getChess960Map().get("pawn_1_3");
-		PiecePosition pawn_4 = handler.getChess960Map().get("pawn_1_4");
-		PiecePosition pawn_5 = handler.getChess960Map().get("pawn_1_5");
-		PiecePosition pawn_6  = handler.getChess960Map().get("pawn_1_6");
-		PiecePosition pawn_7 = handler.getChess960Map().get("pawn_1_7");
-		PiecePosition pawn_8 = handler.getChess960Map().get("pawn_1_8");
+		PiecePosition queen1Position = handler.getChess960Map().get("WHITE_QUEEN");
+		if(queen1Position == null) {
+			System.out.println("Queen one is null");
+		}else {
+			System.out.println("X: " + queen1Position.getX());
+			System.out.println("Y: " + queen1Position.getY());
+			System.out.println(" ");
+		}
+		PiecePosition king1Position = handler.getChess960Map().get("king_1");
+		if(king1Position== null) {
+			System.out.println("King one is null");
+		}else {
+			System.out.println("X: " + king1Position.getX());
+			System.out.println("Y: " + king1Position.getY());
+			System.out.println(" ");
+		}
+
+		PiecePosition bishop2Position = handler.getChess960Map().get("bishop_1_2");
+		if(bishop2Position == null) {
+			System.out.println("Bishop two is null");
+		}else {
+			System.out.println("X: " + bishop2Position.getX());
+			System.out.println("Y: " + bishop2Position.getY());
+			System.out.println(" ");
+		}
+
+		PiecePosition knight2Position = handler.getChess960Map().get("knight_1_2");
+		if(knight2Position == null) {
+			System.out.println("Knight two is null");
+		}else {
+			System.out.println("X: " + knight2Position.getX());
+			System.out.println("Y: " + knight2Position.getY());
+			System.out.println(" ");
+		}
+
+		PiecePosition rook2Position = handler.getChess960Map().get("rook_1_2");
+		if(rook2Position == null) {
+			System.out.println("Rook two is null");
+		}else {
+			System.out.println("X: " + rook2Position.getX());
+			System.out.println("Y: " + rook2Position.getY());
+			System.out.println(" ");
+		}
+
+
+
 		// Initialize the pieces and put it on the board
-			// BLACK Pieces
+		// BLACK Pieces
 		rook_2_1 = new PieceRook(2, 0, 0);
 		knight_2_1 = new PieceKnight(2, 1, 0);
 		bishop_2_1 = new PieceBishop(2, 2, 0);
@@ -311,40 +356,24 @@ public class ChessBoard extends Pane {
 		pawn_2_8 = new PiecePawn(2, 7, 1);
 
 		//WHITE Pieces
-		System.out.println("///////////////////////////////////////////////////////////////////////////////////////////////////////");
-		rook_1_1 = new PieceRook(1, rook_1.getX(), rook_1.getX());
-		System.out.println("Rook 1 "  + rook_1_1.toString());
-		knight_1_1 = new PieceKnight(1, knight_1.getX(), knight_1.getY());
-		System.out.println("Knight 1 " + knight_1_1.toString());
-		bishop_1_1 = new PieceBishop(1, bishop_1.getX(), bishop_1.getY());
-		System.out.println("Bishop 1 " + bishop_1_1.toString());
-		queen_1 = new PieceQueen(1, queen_position.getX(), queen_position.getY());
-		System.out.println("Queen 1 " + queen_1.toString());
-		king_1 = new PieceKing(1, king_position.getX(), king_position.getY());
-		System.out.println("King 1 " + king_1.toString());
-		bishop_1_2 = new PieceBishop(1, bishop_2.getX(), bishop_2.getY());
-		System.out.println("Bishop 2 " + bishop_1_2.toString());
-		knight_1_2 = new PieceKnight(1, knight_2.getX(), knight_2.getY());
-		System.out.println("Knight 2 " + knight_1_2.toString());
-		rook_1_2 = new PieceRook(1, rook_2.getX(), rook_2.getY());
-		System.out.println("Rook 2" + rook_1_2.toString());
-		pawn_1_1 = new PiecePawn(1, pawn_1.getX(), pawn_1.getY());
-		System.out.println("Pawn 1 " + pawn_1.toString());
-		pawn_1_2 = new PiecePawn(1, pawn_2.getX(), pawn_2.getY());
-		System.out.println("Pawn 2 " + pawn_2.toString());
-		pawn_1_3 = new PiecePawn(1, pawn_3.getX(), pawn_3.getY());
-		System.out.println("Pawn 3 "  + pawn_3.toString());
-		pawn_1_4 = new PiecePawn(1, pawn_4.getX(), pawn_4.getY());
-		System.out.println("Pawn 4 " + pawn_4.toString());
-		pawn_1_5 = new PiecePawn(1, pawn_5.getX(), pawn_5.getY());
-		System.out.println("Pawn 5 " + pawn_5.toString());
-		pawn_1_6 = new PiecePawn(1, pawn_6.getX(), pawn_6.getY());
-		System.out.println("Pawn 6 " + pawn_6.toString());
-		pawn_1_7 = new PiecePawn(1, pawn_7.getX(), pawn_7.getY());
-		System.out.println("Pawn 7 " + pawn_7.toString());
-		pawn_1_8 = new PiecePawn(1, pawn_8.getX(), pawn_8.getY());
+		rook_1_1 = new PieceRook(1, rook1Position.getX(), rook1Position.getY());
+		knight_1_1 = new PieceKnight(1, knight1Position.getX(), knight1Position.getY());
+		bishop_1_1 = new PieceBishop(1, bishop1Position.getX(), bishop1Position.getY());
+		queen_1 = new PieceQueen(1, queen1Position.getX(), queen1Position.getY());
+		king_1 = new PieceKing(1, king1Position.getX(), king1Position.getY());
+		bishop_1_2 = new PieceBishop(1, bishop2Position.getX(), bishop2Position.getY());
+		knight_1_2 = new PieceKnight(1, knight2Position.getX(), knight2Position.getY());
+		rook_1_2 = new PieceRook(1, rook2Position.getX(), rook2Position.getY());
 
-		System.out.println("///////////////////////////////////////////////////////////////////////////////////////////////////////");
+
+		pawn_1_1 = new PiecePawn(1, 0, 6);
+		pawn_1_2 = new PiecePawn(1, 1, 6);
+		pawn_1_3 = new PiecePawn(1, 2, 6);
+		pawn_1_4 = new PiecePawn(1, 3, 6);
+		pawn_1_5 = new PiecePawn(1, 4, 6);
+		pawn_1_6 = new PiecePawn(1, 5, 6);
+		pawn_1_7 = new PiecePawn(1, 6, 6);
+		pawn_1_8 = new PiecePawn(1, 7, 6);
 
 		pieces[0][0] = rook_2_1;
 		pieces[1][0] = knight_2_1;
@@ -372,35 +401,23 @@ public class ChessBoard extends Pane {
 			}
 		}
 
-		System.out.println("///////////////////////");
-		pieces[pawn_1.getX()][pawn_1.getY()] = pawn_1_1;
-		pieces[pawn_2.getX()][pawn_2.getY()] = pawn_1_2;
-		pieces[pawn_3.getX()][pawn_3.getY()] = pawn_1_3;
-		pieces[pawn_4.getX()][pawn_4.getY()] = pawn_1_4;
-		pieces[pawn_5.getX()][pawn_5.getY()] = pawn_1_5;
-		pieces[pawn_6.getX()][pawn_6.getY()] = pawn_1_6;
-		pieces[pawn_7.getX()][pawn_7.getY()] = pawn_1_7;
-		pieces[pawn_8.getX()][pawn_8.getY()] = pawn_1_8;
+		pieces[0][6] = pawn_1_1;
+		pieces[1][6] = pawn_1_2;
+		pieces[2][6] = pawn_1_3;
+		pieces[3][6] = pawn_1_4;
+		pieces[4][6] = pawn_1_5;
+		pieces[5][6] = pawn_1_6;
+		pieces[6][6] = pawn_1_7;
+		pieces[7][6] = pawn_1_8;
 
-		pieces[rook_1.getX()][rook_1.getY()] = rook_1_1;
-		pieces[knight_1.getX()][knight_1.getY()] = knight_1_1;
-		pieces[queen_position.getX()][queen_position.getY()] = queen_1;
-		pieces[bishop_1.getX()][bishop_1.getY()] = bishop_1_1;
-		pieces[king_position.getX()][king_position.getY()] = king_1;
-		pieces[bishop_2.getX()][bishop_2.getY()] = bishop_1_2;
-		pieces[knight_2.getX()][knight_2.getY()] = knight_1_2;
-		pieces[rook_2.getX()][rook_2.getY()] = rook_1_2;
-
-		System.out.println("//////////////xc//////////////////////////////////////");
-
-		for(int i = 0; i <= pieces.length; i ++) {
-			for(int j = 0; i < pieces[i].length; j++) {
-				System.out.print(pieces[i][j] + " ");
-			}
-			System.out.println(" ----");
-		}
-		System.out.println("////////////////////////////////////////////////////");
-
+		pieces[rook1Position.getX()][rook1Position.getY()] = rook_1_1;
+		pieces[knight1Position.getX()][knight2Position.getY()] = knight_1_1;
+		pieces[queen1Position.getX()][queen1Position.getY()] = queen_1;
+		pieces[bishop1Position.getX()][bishop1Position.getY()] = bishop_1_1;
+		pieces[king1Position.getX()][king1Position.getY()] = king_1;
+		pieces[bishop2Position.getX()][bishop2Position.getY()] = bishop_1_2;
+		pieces[knight2Position.getX()][knight2Position.getY()] = knight_1_2;
+		pieces[rook2Position.getX()][rook2Position.getY()] = rook_1_2;
 
 		for (int y = 0; y < boardHeight; y++)
 		{
@@ -415,44 +432,58 @@ public class ChessBoard extends Pane {
 			}
 		}
 
+		ImageView imageView  = pieces[0][0].getImage();
+		ImageView imageView2  = pieces[0][1].getImage();
+		ImageView imageView3  = pieces[0][6].getImage();
+		ImageView imageView4  = pieces[0][7].getImage();
 
+		ImageView imageView5  = pieces[1][0].getImage();
+		ImageView imageView6  = pieces[1][1].getImage();
+		ImageView imageView7  = pieces[1][6].getImage();
+		ImageView imageView8  = pieces[1][7].getImage();
+
+		ImageView imageView9  = pieces[2][0].getImage();
+		ImageView imageView10  = pieces[2][1].getImage();
+		ImageView imageView11 = pieces[2][6].getImage();
+		ImageView imageView12  = pieces[2][7].getImage();
+
+		ImageView imageView13  = pieces[3][0].getImage();
+		ImageView imageView14 = pieces[3][1].getImage();
+		ImageView imageView15 = pieces[3][6].getImage();
+		ImageView imageView16 = pieces[3][7].getImage();
+
+
+		ImageView imageView17  = pieces[4][0].getImage();
+		ImageView imageView18 = pieces[4][1].getImage();
+		ImageView imageView19 = pieces[4][6].getImage();
+		ImageView imageView20 = pieces[4][7].getImage();
+
+		ImageView imageView21  = pieces[5][0].getImage();
+		ImageView imageView22 = pieces[5][1].getImage();
+		ImageView imageView23 = pieces[5][6].getImage();
+		System.out.println("Pieces " + pieces[5][7]);
+
+		ImageView imageView24 = pieces[5][7].getImage();
+
+		System.out.println("Pieces " + pieces[6][0]);
+		ImageView imageView25  = pieces[6][0].getImage();
+		System.out.println("Pieces " + pieces[6][1]);
+		ImageView imageView26 = pieces[6][1].getImage();
+		System.out.println("Pieces " + pieces[6][6]);
+		ImageView imageView27 = pieces[6][6].getImage();
+		System.out.println("Pieces " + pieces[6][7]);
+		ImageView imageView28 = pieces[6][7].getImage();
+
+		System.out.println("Pieces " + pieces[7][0]);
+		ImageView imageView29  = pieces[7][0].getImage();
+		System.out.println("Pieces " + pieces[7][1]);
+		ImageView imageView30 = pieces[7][1].getImage();
+		System.out.println("Pieces " + pieces[7][6]);
+		ImageView imageView31 = pieces[7][6].getImage();
+		System.out.println("Pieces " + pieces[7][7]);
+		ImageView imageView32 = pieces[7][7].getImage();
 
 		for(int i = 0; i < 8; i++){
-			System.out.println("LOOP: s" + i);
-
-			if(getChildren() == null) {
-				System.out.println("Children are null");
-			} else {
-				System.out.println("Childrens are not null");
-
-			}
-
-
-			System.out.println("Before");
-			ImageView img0 = pieces[i][0].getImage();
-			if(img0 == null) {
-				System.exit(0);
-			}
-			System.out.println("Passed first image");
-			ImageView img1 = pieces[i][1].getImage();
-			System.out.println("Passed second image");
-			System.out.println(" " + i + " 6");
-			ImageView img6 = pieces[i][6].getImage();
-			System.out.println("Passed third image");
-			System.out.println(" " + i + " 7");
-			if(pieces[5][7] == null) {
-				System.out.println(" 5 7 IS NULL\n");
-			}
-			if(pieces[6][7] == null) {
-				System.out.println(" 6 7 IS NULL\n");
-			}
-			if(pieces[7][7] == null) {
-				System.out.println(" 7 7 IS NULL\n");
-			}
-			System.out.println("ASdffsdsfsdf");
-			ImageView img7 = pieces[i][7].getImage();
-			System.out.println("Passed fourth image");
-
 			getChildren().addAll(pieces[i][0].getImage(), pieces[i][1].getImage(), pieces[i][6].getImage(), pieces[i][7].getImage());
 		}
 	}
