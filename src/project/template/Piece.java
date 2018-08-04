@@ -106,6 +106,9 @@ public abstract class Piece extends Group{
 	
 	// Return the image of the piece
 	public ImageView getImage() {
+		if(imageView == null) {
+			System.out.println("Image is null");
+		}
 		return (imageView);
 	}
 	
@@ -206,6 +209,10 @@ public abstract class Piece extends Group{
 	public int getY(){
 		return this.yPos;
 	}
-	
 
+
+	@Override
+	public String toString() {
+		return super.toString();
+	}
 }

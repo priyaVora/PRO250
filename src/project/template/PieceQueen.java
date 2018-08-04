@@ -39,6 +39,9 @@ public class PieceQueen extends Piece {
 	@Override
 	public void SelectPiece(ChessBoard chessBoard) {
 		chessBoard.colorSquare(this.xPos, this.yPos, true);
+		System.out.println("QUEEN");
+		System.out.println(this.xPos);
+		System.out.println(this.yPos);
 		// Bishop ability
 		int y = this.yPos + 1;
 		if (chessBoard.checkState && !this.isASavior)

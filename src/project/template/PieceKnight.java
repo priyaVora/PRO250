@@ -42,6 +42,7 @@ public class PieceKnight extends Piece{
 	@Override
 	public void SelectPiece(ChessBoard chessBoard) {
 		int x = 0;
+		System.out.println("KNIGHT");
 		chessBoard.colorSquare(this.xPos, this.yPos, true);
 		if (chessBoard.checkState && !this.isASavior)
 			return;

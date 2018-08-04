@@ -1,17 +1,18 @@
 package project.template;
 
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
+
 import javafx.animation.Timeline;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import project.chess960.implementation.Chess960Handler;
+import project.chess960.implementation.PiecePosition;
 
 public class ChessBoard extends Pane {
 	// private fields
@@ -95,6 +96,7 @@ public class ChessBoard extends Pane {
 	private Timer timer;
 
 	private String currentGameMode;
+	private Chess960Handler handler;
 
 
 	public ChessBoard(StatusBar newStatusBar, String gameMode) {
@@ -121,6 +123,8 @@ public class ChessBoard extends Pane {
 
 		// initialize windows array to the correct size
 		windows = new Window[boardWidth][boardHeight];
+
+		handler = new Chess960Handler();
 
 		// for loop to populate all arrays to default values and add the windows
 		// to the board
@@ -249,6 +253,8 @@ public class ChessBoard extends Pane {
 			}
 		}
 
+
+
 		for(int i = 0; i < 8; i++){
 			getChildren().addAll(pieces[i][0].getImage(), pieces[i][1].getImage(), pieces[i][6].getImage(), pieces[i][7].getImage());
 		}
@@ -256,8 +262,37 @@ public class ChessBoard extends Pane {
 
 	public void initPieceChess960()
 	{
+		System.out.println("Chess 960 Game Map\n");
+		if(handler.getChess960Map() == null) {
+			System.out.println("Map is null");
+		}
+		for (Map.Entry<String, PiecePosition> entry : handler.getChess960Map().entrySet()) {
+			String key = entry.getKey();
+			PiecePosition value = entry.getValue();
+			System.out.println(key);
+			System.out.println(value.getX());
+			System.out.println(value.getY());
+		}
+
+		PiecePosition rook_1 = handler.getChess960Map().get("rook_1_1");
+		PiecePosition knight_1 = handler.getChess960Map().get("knight_1_1");
+		PiecePosition bishop_1 = handler.getChess960Map().get("bishop_1_1");
+		PiecePosition king_position= handler.getChess960Map().get("king_1");
+		PiecePosition queen_position = handler.getChess960Map().get("WHITE_QUEEN");
+		PiecePosition bishop_2 = handler.getChess960Map().get("bishop_1_1");
+		PiecePosition knight_2= handler.getChess960Map().get("knight_1_1");
+		PiecePosition rook_2 = handler.getChess960Map().get("rook_1_2");
+
+		PiecePosition pawn_1 = handler.getChess960Map().get("pawn_1_1");
+		PiecePosition pawn_2 = handler.getChess960Map().get("pawn_1_2");
+		PiecePosition pawn_3 = handler.getChess960Map().get("pawn_1_3");
+		PiecePosition pawn_4 = handler.getChess960Map().get("pawn_1_4");
+		PiecePosition pawn_5 = handler.getChess960Map().get("pawn_1_5");
+		PiecePosition pawn_6  = handler.getChess960Map().get("pawn_1_6");
+		PiecePosition pawn_7 = handler.getChess960Map().get("pawn_1_7");
+		PiecePosition pawn_8 = handler.getChess960Map().get("pawn_1_8");
 		// Initialize the pieces and put it on the board
-		// BLACK Pieces
+			// BLACK Pieces
 		rook_2_1 = new PieceRook(2, 0, 0);
 		knight_2_1 = new PieceKnight(2, 1, 0);
 		bishop_2_1 = new PieceBishop(2, 2, 0);
@@ -276,22 +311,40 @@ public class ChessBoard extends Pane {
 		pawn_2_8 = new PiecePawn(2, 7, 1);
 
 		//WHITE Pieces
-		rook_1_1 = new PieceRook(1, 0, 7);
-		knight_1_1 = new PieceKnight(1, 1, 7);
-		bishop_1_1 = new PieceBishop(1, 2, 7);
-		queen_1 = new PieceQueen(1, 3, 7);
-		king_1 = new PieceKing(1, 4, 7);
-		bishop_1_2 = new PieceBishop(1, 5, 7);
-		knight_1_2 = new PieceKnight(1, 6, 7);
-		rook_1_2 = new PieceRook(1, 7, 7);
-		pawn_1_1 = new PiecePawn(1, 0, 6);
-		pawn_1_2 = new PiecePawn(1, 1, 6);
-		pawn_1_3 = new PiecePawn(1, 2, 6);
-		pawn_1_4 = new PiecePawn(1, 3, 6);
-		pawn_1_5 = new PiecePawn(1, 4, 6);
-		pawn_1_6 = new PiecePawn(1, 5, 6);
-		pawn_1_7 = new PiecePawn(1, 6, 6);
-		pawn_1_8 = new PiecePawn(1, 7, 6);
+		System.out.println("///////////////////////////////////////////////////////////////////////////////////////////////////////");
+		rook_1_1 = new PieceRook(1, rook_1.getX(), rook_1.getX());
+		System.out.println("Rook 1 "  + rook_1_1.toString());
+		knight_1_1 = new PieceKnight(1, knight_1.getX(), knight_1.getY());
+		System.out.println("Knight 1 " + knight_1_1.toString());
+		bishop_1_1 = new PieceBishop(1, bishop_1.getX(), bishop_1.getY());
+		System.out.println("Bishop 1 " + bishop_1_1.toString());
+		queen_1 = new PieceQueen(1, queen_position.getX(), queen_position.getY());
+		System.out.println("Queen 1 " + queen_1.toString());
+		king_1 = new PieceKing(1, king_position.getX(), king_position.getY());
+		System.out.println("King 1 " + king_1.toString());
+		bishop_1_2 = new PieceBishop(1, bishop_2.getX(), bishop_2.getY());
+		System.out.println("Bishop 2 " + bishop_1_2.toString());
+		knight_1_2 = new PieceKnight(1, knight_2.getX(), knight_2.getY());
+		System.out.println("Knight 2 " + knight_1_2.toString());
+		rook_1_2 = new PieceRook(1, rook_2.getX(), rook_2.getY());
+		System.out.println("Rook 2" + rook_1_2.toString());
+		pawn_1_1 = new PiecePawn(1, pawn_1.getX(), pawn_1.getY());
+		System.out.println("Pawn 1 " + pawn_1.toString());
+		pawn_1_2 = new PiecePawn(1, pawn_2.getX(), pawn_2.getY());
+		System.out.println("Pawn 2 " + pawn_2.toString());
+		pawn_1_3 = new PiecePawn(1, pawn_3.getX(), pawn_3.getY());
+		System.out.println("Pawn 3 "  + pawn_3.toString());
+		pawn_1_4 = new PiecePawn(1, pawn_4.getX(), pawn_4.getY());
+		System.out.println("Pawn 4 " + pawn_4.toString());
+		pawn_1_5 = new PiecePawn(1, pawn_5.getX(), pawn_5.getY());
+		System.out.println("Pawn 5 " + pawn_5.toString());
+		pawn_1_6 = new PiecePawn(1, pawn_6.getX(), pawn_6.getY());
+		System.out.println("Pawn 6 " + pawn_6.toString());
+		pawn_1_7 = new PiecePawn(1, pawn_7.getX(), pawn_7.getY());
+		System.out.println("Pawn 7 " + pawn_7.toString());
+		pawn_1_8 = new PiecePawn(1, pawn_8.getX(), pawn_8.getY());
+
+		System.out.println("///////////////////////////////////////////////////////////////////////////////////////////////////////");
 
 		pieces[0][0] = rook_2_1;
 		pieces[1][0] = knight_2_1;
@@ -319,23 +372,35 @@ public class ChessBoard extends Pane {
 			}
 		}
 
-		pieces[0][6] = pawn_1_1;
-		pieces[1][6] = pawn_1_2;
-		pieces[2][6] = pawn_1_3;
-		pieces[3][6] = pawn_1_4;
-		pieces[4][6] = pawn_1_5;
-		pieces[5][6] = pawn_1_6;
-		pieces[6][6] = pawn_1_7;
-		pieces[7][6] = pawn_1_8;
+		System.out.println("///////////////////////");
+		pieces[pawn_1.getX()][pawn_1.getY()] = pawn_1_1;
+		pieces[pawn_2.getX()][pawn_2.getY()] = pawn_1_2;
+		pieces[pawn_3.getX()][pawn_3.getY()] = pawn_1_3;
+		pieces[pawn_4.getX()][pawn_4.getY()] = pawn_1_4;
+		pieces[pawn_5.getX()][pawn_5.getY()] = pawn_1_5;
+		pieces[pawn_6.getX()][pawn_6.getY()] = pawn_1_6;
+		pieces[pawn_7.getX()][pawn_7.getY()] = pawn_1_7;
+		pieces[pawn_8.getX()][pawn_8.getY()] = pawn_1_8;
 
-		pieces[0][7] = rook_1_1;
-		pieces[1][7] = knight_1_1;
-		pieces[2][7] = bishop_1_1;
-		pieces[3][7] = queen_1;
-		pieces[4][7] = king_1;
-		pieces[5][7] = bishop_1_2;
-		pieces[6][7] = knight_1_2;
-		pieces[7][7] = rook_1_2;
+		pieces[rook_1.getX()][rook_1.getY()] = rook_1_1;
+		pieces[knight_1.getX()][knight_1.getY()] = knight_1_1;
+		pieces[queen_position.getX()][queen_position.getY()] = queen_1;
+		pieces[bishop_1.getX()][bishop_1.getY()] = bishop_1_1;
+		pieces[king_position.getX()][king_position.getY()] = king_1;
+		pieces[bishop_2.getX()][bishop_2.getY()] = bishop_1_2;
+		pieces[knight_2.getX()][knight_2.getY()] = knight_1_2;
+		pieces[rook_2.getX()][rook_2.getY()] = rook_1_2;
+
+		System.out.println("//////////////xc//////////////////////////////////////");
+
+		for(int i = 0; i <= pieces.length; i ++) {
+			for(int j = 0; i < pieces[i].length; j++) {
+				System.out.print(pieces[i][j] + " ");
+			}
+			System.out.println(" ----");
+		}
+		System.out.println("////////////////////////////////////////////////////");
+
 
 		for (int y = 0; y < boardHeight; y++)
 		{
@@ -350,7 +415,44 @@ public class ChessBoard extends Pane {
 			}
 		}
 
+
+
 		for(int i = 0; i < 8; i++){
+			System.out.println("LOOP: s" + i);
+
+			if(getChildren() == null) {
+				System.out.println("Children are null");
+			} else {
+				System.out.println("Childrens are not null");
+
+			}
+
+
+			System.out.println("Before");
+			ImageView img0 = pieces[i][0].getImage();
+			if(img0 == null) {
+				System.exit(0);
+			}
+			System.out.println("Passed first image");
+			ImageView img1 = pieces[i][1].getImage();
+			System.out.println("Passed second image");
+			System.out.println(" " + i + " 6");
+			ImageView img6 = pieces[i][6].getImage();
+			System.out.println("Passed third image");
+			System.out.println(" " + i + " 7");
+			if(pieces[5][7] == null) {
+				System.out.println(" 5 7 IS NULL\n");
+			}
+			if(pieces[6][7] == null) {
+				System.out.println(" 6 7 IS NULL\n");
+			}
+			if(pieces[7][7] == null) {
+				System.out.println(" 7 7 IS NULL\n");
+			}
+			System.out.println("ASdffsdsfsdf");
+			ImageView img7 = pieces[i][7].getImage();
+			System.out.println("Passed fourth image");
+
 			getChildren().addAll(pieces[i][0].getImage(), pieces[i][1].getImage(), pieces[i][6].getImage(), pieces[i][7].getImage());
 		}
 	}
@@ -490,19 +592,28 @@ public class ChessBoard extends Pane {
 	
 	// select piece method
 	public void selectPiece(final double x, final double y){
+		System.out.println("Select Method Called");
 		int indexX = (int) (x/ cell_width);
 		int indexY = (int) (y/ cell_height);
+
+		System.out.println(indexX);
+		System.out.println(indexY);
 		
 		if (!checkmate && !stalemate && !timer.timeIsOver)
 		{
+			System.out.print("Select no checkmate, select no stalemate, "+ "Select no timer");
 			if (windows[indexX][indexY].isHighlighted())
 			{
+				System.out.print("Select window is highlighted");
+				System.out.println(windows[indexX][indexY]);
+				System.out.println(windows[indexX][indexY].isHighlighted());
 				movePiece(x, y);
 				unhighlightWindow();
 				selectedPiece = null;
 			}
 			else
 			{
+				System.out.println("Window is not highlighted");
 				//add condition to know if the player is in check
 				if(board[indexX][indexY] == current_player){
 					unhighlightWindow();
@@ -517,10 +628,11 @@ public class ChessBoard extends Pane {
 	public void movePiece(final double x, final double y){
 		int indexX = (int) (x/ cell_width);
 		int indexY = (int) (y/ cell_height);
-		
+		System.out.println("Moved Method Called");
+
 		// add a condition to know if the player can put his piece there
 		selectedPiece.MovePiece(this, indexX, indexY);
-		// change isFirstTime (pas beau, il faudrait le faire qu'une fois) 
+		// change isFirstTime (pas beau, il faudrait le faire qu'une fois)
 		selectedPiece.setFirstTime(false);
 		// don't forget to change the player
 		if (current_player == PlayerWhite)
@@ -534,6 +646,7 @@ public class ChessBoard extends Pane {
 			}
 			if (gameLogic.isCheck(this, king_2.xPos, king_2.yPos, current_player, true))
 			{
+
 				checkPieces.clear();
 				saviorPieces.clear();
 				checkState = true;
@@ -653,11 +766,19 @@ public class ChessBoard extends Pane {
 		}
 	}
 	
-	public void colorSquare(int x, int y, boolean selectedPiece) {
-		if (selectedPiece)
+	public void colorSquare(int x, int y, boolean selectedPiece)
+	{
+
+		System.out.println("Color Change Method Called");
+		if (selectedPiece) {
+			System.out.println("X: " + x);
+			System.out.println("Y: " + y);
 			windows[x][y].highlightWindow(Color.ORANGE);
-		else
-			windows[x][y].highlightWindow(Color.GREEN);			
+		} else {
+			System.out.println("X: " + x);
+			System.out.println("Y: " + y);
+			windows[x][y].highlightWindow(Color.GREEN);
+		}
 	}
 	
 	public void unhighlightWindow()

@@ -33,7 +33,12 @@ public class PieceRook extends Piece {
 	        imageView.setCache(true);
 		}
 	}
-	
+
+	@Override
+	public String toString() {
+		return super.toString();
+	}
+
 	@Override
 	public ImageView getImage() {
 		return (imageView);
