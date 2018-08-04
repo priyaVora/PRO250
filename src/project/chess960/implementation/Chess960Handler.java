@@ -5,10 +5,7 @@ import project.template.PiecePawn;
 
 import javax.swing.text.Position;
 import java.lang.reflect.Array;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Chess960Handler {
@@ -117,6 +114,49 @@ public class Chess960Handler {
 
     public void randomize() {
         System.out.println(" ----------------- ");
+        Random random = new Random();
+        String[][] tempArray = new String[whitePostion.length][whitePostion[0].length];
+
+        tempArray[1][0] = whitePostion[1][0];
+        tempArray[1][1] = whitePostion[1][1];
+        tempArray[1][2] = whitePostion[1][2];
+        tempArray[1][3] = whitePostion[1][3];
+        tempArray[1][4] = whitePostion[1][4];
+        tempArray[1][5] = whitePostion[1][5];
+        tempArray[1][6] = whitePostion[1][6];
+        tempArray[1][7] = whitePostion[1][7];
+
+        List<String> whitePositionBottom = new ArrayList<String>();
+
+            whitePositionBottom.add(0, whitePostion[0][0]);
+            whitePositionBottom.add(1, whitePostion[0][1]);
+            whitePositionBottom.add(2, whitePostion[0][2]);
+            whitePositionBottom.add(3, whitePostion[0][3]);
+            whitePositionBottom.add(4, whitePostion[0][4]);
+            whitePositionBottom.add(5, whitePostion[0][5]);
+            whitePositionBottom.add(6, whitePostion[0][6]);
+            whitePositionBottom.add(7, whitePostion[0][7]);
+
+        Collections.shuffle(whitePositionBottom);
+
+        int index = 0;
+        for (int i = 0; i >= 0; i--) {
+            for (int j = 0; j < tempArray[i].length; j++) {
+                    tempArray[i][j] = whitePositionBottom.get(index);
+                    index++;
+            }
+        }
+        System.out.println("Temp Array");
+
+        for (int i = 1; i >= 0; i--) {
+            for (int j = 0; j < tempArray[i].length; j++) {
+                System.out.print(tempArray[i][j] + " ");
+            }
+            System.out.println(" ");
+
+        }
+
+        whitePostion = tempArray;
         addToChessMap();
     }
 
