@@ -1,13 +1,8 @@
 package project.chess960.implementation;
 
 import org.omg.Messaging.SYNC_WITH_TRANSPORT;
-import project.template.Piece;
-import project.template.PiecePawn;
-
-import javax.swing.text.Position;
-import java.lang.reflect.Array;
 import java.util.*;
-import java.util.concurrent.ThreadLocalRandom;
+
 
 public class Chess960Handler {
     //HashMap for Valid Possible Chess960 Board Setup
@@ -70,17 +65,11 @@ public class Chess960Handler {
 
     }
 
-    public void mirrorBlackPie7ces(String[] board) {
-        System.out.println("--------mirror starts----------");
+    public void mirrorBlackPieces(String[] board) {
         String[] black_pieces = new String[board.length];
 
-        System.out.println(" ");
-        for (int i = 0; i < board.length; i++) {
-            System.out.print(board[i] + " ");
-        }
-        System.out.println(" ");
        for (int i = 0; i < board.length; i++) {
-           System.out.println(board[i]);
+
            if(board[i].contains("knight")) {
                if(board[i].equals("knight_1_1")) {
                     black_pieces[i] = "knight_2_1";
@@ -108,12 +97,6 @@ public class Chess960Handler {
                black_pieces[i] = "king_2";
            }
        }
-        System.out.println(" ");
-        for (int i = 0; i < black_pieces.length; i++) {
-            System.out.print(black_pieces[i] + " ");
-        }
-
-
 
         int positionCounter = 0;
         for (int i = 0; i <= 0; i++) {
@@ -124,7 +107,7 @@ public class Chess960Handler {
                 positionCounter++;
             }
         }
-        System.out.println("\n--------mirror ends----------");
+
 
 
     }
@@ -137,7 +120,6 @@ public class Chess960Handler {
         board = addQueen_Knights(board);
         board = addRook_King_Rook(board);
 
-        System.out.println();
         return board;
     }
 
@@ -184,7 +166,6 @@ public class Chess960Handler {
         return board;
     }
 
-
     public String[] addRook_King_Rook(String[] board) {
         String[] kingRooks = {"rook_1_1", "king_1", "rook_1_2"};
         int randomPosition= 0;
@@ -201,16 +182,9 @@ public class Chess960Handler {
         return board;
     }
 
-    public static void  main(String args[]) {
-        System.out.println("Chess 960");
-        Chess960Handler handler = new Chess960Handler();
-        handler.printPosition_White();
-      //  handler.randomize();
-        System.out.println(" ");
-        System.out.println("\nBlack Chess 960 Positions:\n ");
-        handler.printPosition_Black();
-    }
-
+    /**
+     * Changes array positions to board positions- Returned PiecePosition has position specificly located on board.
+     * */
     public PiecePosition changeOriginalWhitePosition(int x, int y) {
         PiecePosition position = new PiecePosition();
 
@@ -266,6 +240,11 @@ public class Chess960Handler {
         }
         return position;
     }
+
+
+    /**
+     * Changes array positions to board positions- Returned PiecePosition has position specificly located on board.
+     * */
     public PiecePosition changeOriginalBlackPosition(int x, int y) {
         PiecePosition position = new PiecePosition();
 
@@ -323,7 +302,6 @@ public class Chess960Handler {
     }
 
     public void randomize() {
-        System.out.println(" ----------------- ");
         Random random = new Random();
 
 
@@ -344,7 +322,7 @@ public class Chess960Handler {
         whitePostion = tempArray;
 
         chess960Map = new HashMap<>();
-        mirrorBlackPie7ces(board);
+        mirrorBlackPieces(board);
         addToChessMap();
     }
 
@@ -352,7 +330,6 @@ public class Chess960Handler {
         if(chess960Map != null) {
             for (int i = 1; i >= 0; i--) {
                 for (int j = 0; j < whitePostion[i].length; j++) {
-                    System.out.println(whitePostion[i][j]);
                     PiecePosition position = changeOriginalWhitePosition(i,j);
                     chess960Map.put(whitePostion[i][j], position);
                 }
