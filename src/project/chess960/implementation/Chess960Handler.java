@@ -70,7 +70,7 @@ public class Chess960Handler {
 
     }
 
-    public void mirrorBlackPieces(String[] board) {
+    public void mirrorBlackPie7ces(String[] board) {
         System.out.println("--------mirror starts----------");
         String[] black_pieces = new String[board.length];
 
@@ -97,7 +97,7 @@ public class Chess960Handler {
 
            } else if(board[i].contains("bishop")) {
                if(board[i].equals("bishop_1_1")) {
-                   black_pieces[i] = "bishop_2_2";
+                   black_pieces[i] = "bishop_2_1";
                } else {
                    black_pieces[i] = "bishop_2_2";
                }
@@ -119,10 +119,8 @@ public class Chess960Handler {
         for (int i = 0; i <= 0; i++) {
             for (int j = 0; j < blackPosition[i].length; j++) {
                 blackPosition[i][j] = black_pieces[positionCounter];
-                PiecePosition position = new PiecePosition();
-                position.setX(i);
-                position.setY(j);
-                chess960Map.put(blackPosition[i][j], position);
+                PiecePosition position = changeOriginalBlackPosition(i,j);
+                chess960Map.put(black_pieces[positionCounter], position);
                 positionCounter++;
             }
         }
@@ -140,7 +138,6 @@ public class Chess960Handler {
         board = addRook_King_Rook(board);
 
         System.out.println();
-        mirrorBlackPieces(board);
         return board;
     }
 
@@ -269,6 +266,61 @@ public class Chess960Handler {
         }
         return position;
     }
+    public PiecePosition changeOriginalBlackPosition(int x, int y) {
+        PiecePosition position = new PiecePosition();
+
+
+        if(x == 1 && y == 0) {
+            position.setX(0);
+            position.setY(1);
+        } else if(x == 1 && y == 1) {
+            position.setX(1);
+            position.setY(1);
+        } else if(x ==1 && y == 2) {
+            position.setX(2);
+            position.setY(1);
+        } else if(x ==1 && y == 3) {
+            position.setX(3);
+            position.setY(1);
+        } else if(x ==1 && y == 4) {
+            position.setX(4);
+            position.setY(1);
+        }else if(x ==1 && y ==5 ) {
+            position.setX(5);
+            position.setY(1);
+        } else if(x ==1 && y ==6 ) {
+            position.setX(6);
+            position.setY(1);
+        } else if(x == 1 && y ==7) {
+            position.setX(7);
+            position.setY(1);
+        } else if(x ==0 && y ==0 ) {
+            position.setX(0);
+            position.setY(0);
+        } else if(x ==0 && y ==1 ) {
+            position.setX(1);
+            position.setY(0);
+        } else if(x ==0 && y ==2) {
+            position.setX(2);
+            position.setY(0);
+        }else if(x == 0 && y ==3) {
+            position.setX(3);
+            position.setY(0);
+        }else if(x ==0 && y ==4 ) {
+            position.setX(4);
+            position.setY(0);
+        }else if(x ==0 && y ==5 ) {
+            position.setX(5);
+            position.setY(0);
+        }else if(x ==0 && y ==6 ) {
+            position.setX(6);
+            position.setY(0);
+        }else if(x ==0 && y ==7 ) {
+            position.setX(7);
+            position.setY(0);
+        }
+        return position;
+    }
 
     public void randomize() {
         System.out.println(" ----------------- ");
@@ -292,6 +344,7 @@ public class Chess960Handler {
         whitePostion = tempArray;
 
         chess960Map = new HashMap<>();
+        mirrorBlackPie7ces(board);
         addToChessMap();
     }
 
@@ -304,6 +357,8 @@ public class Chess960Handler {
                     chess960Map.put(whitePostion[i][j], position);
                 }
             }
+
+
         }
     }
 
@@ -325,7 +380,7 @@ public class Chess960Handler {
         System.out.println("\nBlack Position");
         for (int i = 0; i <= 1; i++) {
             for (int j = 0; j < blackPosition[i].length; j++) {
-               // System.out.print(i + "" + j + " ");
+               //System.out.print(i + "" + j + " ");
                 System.out.print(blackPosition[i][j] + " ");
 
             }
