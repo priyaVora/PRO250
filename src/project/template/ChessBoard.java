@@ -104,17 +104,22 @@ public class ChessBoard extends Pane {
 		// initalize the board: background, data structures, inital layout of
 		// pieces
 		statusBar = newStatusBar;
-		statusBar.whitePlayerAlert.setText("White Player turn");
-		statusBar.blackPlayerAlert.setText("");
-		statusBar.whitePlayerTimer.setText("White timer: 15:00");
-		statusBar.blackPlayerTimer.setText("Black timer: 15:00");
+		if(statusBar != null) {
+			statusBar.whitePlayerAlert.setText("White Player turn");
+			statusBar.blackPlayerAlert.setText("");
+			statusBar.whitePlayerTimer.setText("White timer: 15:00");
+			statusBar.blackPlayerTimer.setText("Black timer: 15:00");
+		}
+
 		currentGameMode = gameMode;
 		System.out.println("Current Game Mode for Chess: "+ currentGameMode);
 
-		background = new Rectangle();
-		background.setFill(Color.WHITE);
+		if(statusBar != null) {
+			background = new Rectangle();
+			background.setFill(Color.WHITE);
 
-		getChildren().add(background);
+			getChildren().add(background);
+		}
 
 		// initialize board array to the correct size
 		board = new int[boardWidth][boardHeight];
@@ -157,6 +162,8 @@ public class ChessBoard extends Pane {
 		timer.timeline.play();
 		timer.playerTurn = current_player;
 	}
+
+
 		
 	public void initPiece()
 	{
@@ -771,6 +778,15 @@ public class ChessBoard extends Pane {
 		return (king_2);
 	}
 
+
+	public void setPieces(Piece[][] pieces) {
+		this.pieces = pieces;
+	}
+
+	public Piece getSelectedPiece() {
+		return selectedPiece;
+	}
+
 	public int getBoardHeight()
 	{
 		return (this.boardHeight);
@@ -790,7 +806,11 @@ public class ChessBoard extends Pane {
 	{
 		this.board[x][y] = type;
 	}
-	
+
+	public Piece[][] getPieces() {
+		return pieces;
+	}
+
 	public Piece getPiece(int x, int y)
 	{
 		return (pieces[x][y]);
