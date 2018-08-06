@@ -80,4 +80,12 @@ public class CustomControl extends Control {
 		statusBar.resize(width, statusBarSize);
 		statusBar.setTranslateY(-(statusBarSize / 2));
 	}
+
+	public void setChessBoard(ChessBoard chessBoard) {
+		this.chessBoard = chessBoard;
+	}
+
+	public ChessBoard getChessBoard() {
+		return chessBoard;
+	}
 }
